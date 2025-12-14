@@ -1,31 +1,22 @@
-#include <string>
-#include <vector>
-#include <iostream>
-
-
 class Solution {
 public:
-    int numDistinct(std::string s, std::string t) {
-
-        std::vector<int> dp(t.length() + 1, 0);
-        dp[0] = 1;
-
-        for (int i = 1; i <= s.length(); i++) {
-            for (int j = t.length(); j >= 1; j--) {
-                if (s[i - 1] == t[j - 1]) {
-                    dp[j] += dp[j - 1];
+    int numberOfBeams(std::vector<std::string>& bank) {
+        int total_count = 0;
+        int cur_bubble_count = 0;
+        int prev_bubble_count = 0;
+        for (std::string& floor : bank) {
+            if (prev_bubble_count != 0) {
+                cur_bubble_count = std::count(floor.begin(), floor.end(), '1');
+                if (cur_bubble_count != 0) {
+                    total_count += cur_bubble_count * prev_bubble_count;
+                    prev_bubble_count = cur_bubble_count;
+                    cur_bubble_count = 0;
                 }
             }
+            else {
+                prev_bubble_count = std::count(floor.begin(), floor.end(), '1');
+            }
         }
-
-        return dp[t.length()];
+        return total_count;
     }
 };
-
-int main() {
-    Solution sol;
-    std::string s = "rabbbit";
-    std::string t = "rabit";
-    std::cout << sol.numDistinct(s, t);
-    return 0;
-}
