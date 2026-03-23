@@ -5,8 +5,13 @@
 class Solution {
 public:
     std::vector<int> countBits(int n) {
-        std::vector<int> dp(n + 1, 0);
+        std::vector<int> dp(1);
+        if (n == 0)
+            return dp;
+        else
+            dp.resize(n + 1);
         dp[0] = 0;
+        dp[1] = 1;
         for (int i = 0; i < n + 1; i++) {
             if ((i * 2) < n + 1)
                 dp[i * 2] = dp[i];
@@ -16,6 +21,7 @@ public:
         return dp;
     }
 };
+
 
 
 int main() {
