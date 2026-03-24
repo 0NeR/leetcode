@@ -1,4 +1,4 @@
-﻿#include <iostream>
+﻿﻿#include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -14,7 +14,7 @@ public:
         if (open == close && close == n) {
             result.push_back(currPosl);
             return;
-        } 
+        }
         if (open - close < 0 || open > n || close > n) {
             return;
         }
